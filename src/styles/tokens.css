@@ -1,0 +1,70 @@
+:root {
+  /* Color tokens：未来换肤时优先修改此处，组件只使用语义变量。 */
+  --color-brand-950: #091b31;
+  --color-brand-900: #0d2747;
+  --color-brand-800: #12345b;
+  --color-brand-700: #1b4778;
+  --color-brand-100: #dceaf7;
+  --color-brand-50: #f0f6fb;
+  --color-neutral-950: #111820;
+  --color-neutral-700: #47515d;
+  --color-neutral-500: #75808c;
+  --color-neutral-300: #cdd3da;
+  --color-neutral-200: #e4e8ec;
+  --color-neutral-100: #f2f4f6;
+  --color-neutral-50: #f8f9fa;
+  --color-white: #ffffff;
+  --color-accent-silver: #aeb8c2;
+  --color-accent-metal: #d6dce2;
+  --color-success: #2d6a57;
+  --color-danger: #9a3d47;
+
+  --color-background: var(--color-white);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-elevated: var(--color-white);
+  --color-text: var(--color-neutral-950);
+  --color-text-muted: var(--color-neutral-700);
+  --color-text-subtle: var(--color-neutral-500);
+  --color-border: var(--color-neutral-200);
+  --color-primary: var(--color-brand-800);
+  --color-primary-hover: var(--color-brand-700);
+  --color-focus: var(--color-brand-100);
+
+  /* Typography */
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Helvetica Neue', var(--font-sans);
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-4xl: clamp(2.25rem, 6vw, 4.75rem);
+  --line-height-tight: 1.08;
+  --line-height-normal: 1.6;
+  --letter-spacing-wide: 0;
+
+  /* Spacing：4px 基准，适合持续扩展。 */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 999px;
+  --shadow-sm: 0 1px 2px rgb(9 27 49 / 0.05);
+  --shadow-md: 0 16px 50px rgb(9 27 49 / 0.08);
+  --shadow-focus: 0 0 0 4px var(--color-focus);
+  --transition-fast: 160ms ease;
+  --transition-base: 240ms ease;
+  --content-width: 80rem;
+  --header-height: 4.5rem;
+}

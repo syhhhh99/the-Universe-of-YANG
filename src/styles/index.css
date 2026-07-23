@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './components.css';
+
+@theme inline {
+  /* Tailwind 工具类使用 archive 前缀，避免与 CSS 语义变量同名而形成循环引用。 */
+  --color-archive-brand: var(--color-primary);
+  --color-archive-canvas: var(--color-background);
+  --color-archive-surface: var(--color-surface);
+  --color-archive-ink: var(--color-text);
+  --font-archive: var(--font-sans);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: var(--line-height-normal);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.container {
+  width: min(100% - 2rem, var(--content-width));
+  margin-inline: auto;
+}
+
+.page-placeholder {
+  display: grid;
+  min-height: calc(100vh - var(--header-height) - 9rem);
+  place-items: center;
+  padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
+  text-align: center;
+}
+
+.page-placeholder h1 {
+  margin: 0;
+  font: 500 var(--font-size-4xl)/var(--line-height-tight) var(--font-display);
+}
+.page-placeholder p {
+  margin: var(--space-4) auto 0;
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
