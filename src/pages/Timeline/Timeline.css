@@ -1,0 +1,311 @@
+.timeline-page {
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  background: #122838;
+  font-family: var(--font-sans);
+}
+.timeline-nav {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 36px;
+  color: #173748;
+  background: rgba(236, 246, 248, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+}
+.timeline-brand {
+  display: grid;
+  gap: 3px;
+  justify-self: start;
+}
+.timeline-brand b {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+.timeline-brand small,
+.back-home {
+  font-size: 7px;
+  letter-spacing: 0.18em;
+}
+.timeline-nav nav {
+  height: 100%;
+  display: flex;
+}
+.timeline-nav nav a {
+  min-width: 138px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 3px;
+  padding: 0 22px;
+  color: rgba(23, 55, 72, 0.48);
+  border-left: 1px solid rgba(23, 55, 72, 0.08);
+}
+.timeline-nav nav a:last-child {
+  border-right: 1px solid rgba(23, 55, 72, 0.08);
+}
+.timeline-nav nav a.is-active,
+.timeline-nav nav a:hover {
+  color: #173748;
+  background: rgba(255, 255, 255, 0.55);
+}
+.timeline-nav nav b {
+  font:
+    400 12px/1.2 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.12em;
+}
+.timeline-nav nav small {
+  font-size: 6px;
+  letter-spacing: 0.18em;
+}
+.back-home {
+  justify-self: end;
+}
+.timeline-backgrounds {
+  position: fixed;
+  z-index: 0;
+  inset: 72px 0 0;
+  background: #172e3e;
+}
+.timeline-backgrounds img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: saturate(0.72);
+  transform: scale(1.035);
+  transition:
+    opacity 1.15s ease,
+    transform 7s ease;
+}
+.timeline-backgrounds img.is-active {
+  opacity: 0.42;
+  transform: scale(1);
+}
+.timeline-background-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5, 19, 31, 0.82), rgba(8, 25, 37, 0.42) 48%, rgba(4, 17, 28, 0.78)),
+    linear-gradient(0deg, rgba(3, 14, 24, 0.7), transparent 45%, rgba(4, 16, 27, 0.35));
+}
+.timeline-scroll {
+  position: relative;
+  z-index: 2;
+  height: calc(100vh - 72px);
+  margin-top: 72px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.timeline-intro,
+.timeline-work {
+  min-height: calc(100vh - 72px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.timeline-intro {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 8vh 8vw;
+}
+.timeline-intro > span {
+  font-size: 8px;
+  letter-spacing: 0.34em;
+  opacity: 0.7;
+}
+.timeline-intro h1 {
+  margin: 18px 0 14px;
+  font:
+    400 clamp(58px, 7vw, 108px)/1 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.12em;
+}
+.timeline-intro p {
+  margin: 0;
+  font:
+    400 clamp(14px, 1.25vw, 20px)/1.8 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.12em;
+}
+.timeline-intro > i {
+  position: absolute;
+  bottom: 5vh;
+  font-size: 7px;
+  font-style: normal;
+  letter-spacing: 0.24em;
+  opacity: 0.62;
+}
+.timeline-intro > i:after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 38px;
+  margin: 12px auto 0;
+  background: linear-gradient(#fff, transparent);
+}
+.timeline-work {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8vh 8vw;
+}
+.timeline-work.is-right {
+  justify-content: flex-end;
+}
+.work-year {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+.work-year span {
+  font:
+    400 clamp(88px, 13vw, 210px)/0.8 Georgia,
+    serif;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.2);
+}
+.work-year small {
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.7);
+}
+.work-card {
+  position: relative;
+  z-index: 2;
+  width: min(680px, 43vw);
+  min-height: min(62vh, 610px);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(15, 35, 49, 0.28);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  transition: transform 0.6s ease;
+}
+.timeline-work.is-left .work-card {
+  transform: rotate(-0.45deg);
+}
+.timeline-work.is-right .work-card {
+  transform: rotate(0.45deg);
+}
+.work-image {
+  min-height: 0;
+  overflow: hidden;
+}
+.work-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  filter: saturate(0.82);
+}
+.work-info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 6px 24px;
+  padding: 24px 20px 16px;
+}
+.work-info > span {
+  grid-column: 1/-1;
+  font-size: 7px;
+  letter-spacing: 0.24em;
+  opacity: 0.58;
+}
+.work-info h2 {
+  margin: 4px 0 0;
+  font:
+    400 clamp(28px, 2.5vw, 42px)/1.15 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.08em;
+}
+.work-info p {
+  grid-column: 1;
+  margin: 4px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  opacity: 0.72;
+}
+.work-info button {
+  grid-column: 2;
+  grid-row: 2/4;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 99px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.work-info button i {
+  margin-left: 12px;
+  font-style: normal;
+}
+@media (max-width: 900px) {
+  .timeline-nav {
+    grid-template-columns: 1fr auto;
+    padding: 0 18px;
+  }
+  .timeline-nav nav {
+    display: none;
+  }
+  .timeline-brand small {
+    display: none;
+  }
+  .work-year {
+    top: 17%;
+    left: 50%;
+  }
+  .work-year span {
+    font-size: 25vw;
+  }
+  .timeline-work,
+  .timeline-work.is-right {
+    justify-content: center;
+    padding: 14vh 6vw 5vh;
+  }
+  .work-card {
+    width: min(620px, 88vw);
+    min-height: 62vh;
+  }
+  .work-image img {
+    min-height: 300px;
+  }
+  .work-info {
+    padding: 18px 10px 10px;
+  }
+  .work-info button {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline-backgrounds img,
+  .timeline-scroll {
+    transition: none;
+    scroll-behavior: auto;
+  }
+}
