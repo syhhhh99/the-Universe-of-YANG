@@ -77,6 +77,14 @@
   inset: 72px 0 0;
   background: #172e3e;
 }
+.timeline-backgrounds::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 22%, rgba(116, 165, 186, 0.18), transparent 32%),
+    radial-gradient(circle at 80% 72%, rgba(65, 104, 124, 0.22), transparent 38%);
+}
 .timeline-backgrounds img {
   position: absolute;
   inset: 0;
@@ -89,6 +97,18 @@
   transition:
     opacity 1.15s ease,
     transform 7s ease;
+}
+.timeline-backgrounds img:nth-child(1) {
+  object-position: center 45%;
+}
+.timeline-backgrounds img:nth-child(2) {
+  object-position: center 48%;
+}
+.timeline-backgrounds img:nth-child(3) {
+  object-position: center 45%;
+}
+.timeline-backgrounds img:nth-child(4) {
+  object-position: center 43%;
 }
 .timeline-backgrounds img.is-active {
   opacity: 0.42;
@@ -108,7 +128,6 @@
   margin-top: 72px;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
 }
 .timeline-intro,
 .timeline-work {
@@ -195,9 +214,8 @@
   position: relative;
   z-index: 2;
   width: min(680px, 43vw);
-  min-height: min(62vh, 610px);
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
   padding: 14px;
   border: 1px solid rgba(255, 255, 255, 0.34);
   background: rgba(15, 35, 49, 0.28);
@@ -212,15 +230,68 @@
   transform: rotate(0.45deg);
 }
 .work-image {
+  position: relative;
+  aspect-ratio: 1.66 / 1;
   min-height: 0;
   overflow: hidden;
 }
 .work-image img {
-  width: 100%;
-  height: 100%;
-  min-height: 330px;
-  object-fit: cover;
+  position: absolute;
+  display: block;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
   filter: saturate(0.82);
+}
+.work-image-placeholder {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  height: 100%;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  overflow: hidden;
+  color: rgba(235, 246, 249, 0.78);
+  background:
+    linear-gradient(135deg, rgba(72, 111, 130, 0.2), transparent 48%),
+    linear-gradient(315deg, rgba(115, 150, 166, 0.14), transparent 52%), #102a3a;
+}
+.work-image-placeholder::before,
+.work-image-placeholder::after {
+  content: '';
+  position: absolute;
+  border: 1px solid rgba(218, 239, 246, 0.13);
+  border-radius: 50%;
+}
+.work-image-placeholder::before {
+  width: 260px;
+  height: 260px;
+}
+.work-image-placeholder::after {
+  width: 340px;
+  height: 340px;
+  border-style: dashed;
+}
+.work-image-placeholder span,
+.work-image-placeholder strong,
+.work-image-placeholder small {
+  position: relative;
+  z-index: 1;
+}
+.work-image-placeholder span,
+.work-image-placeholder small {
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  opacity: 0.62;
+}
+.work-image-placeholder strong {
+  font:
+    400 22px/1.4 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.14em;
 }
 .work-info {
   display: grid;
@@ -242,15 +313,26 @@
     'SimSun',
     serif;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
-.work-info p {
+.work-info h2.is-long-title {
+  font-size: clamp(19px, 1.7vw, 29px);
+  letter-spacing: 0.04em;
+}
+.work-meta {
   grid-column: 1;
-  margin: 4px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+  margin-top: 4px;
+}
+.work-meta p {
+  margin: 0;
   font-size: 10px;
   letter-spacing: 0.1em;
   opacity: 0.72;
 }
-.work-info button {
+.work-info .work-detail-entry {
   grid-column: 2;
   grid-row: 2/4;
   padding: 11px 16px;
@@ -260,10 +342,112 @@
   background: rgba(255, 255, 255, 0.08);
   font-size: 8px;
   letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
-.work-info button i {
+.work-info .work-detail-entry:hover {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+.work-info .work-detail-entry i {
   margin-left: 12px;
   font-style: normal;
+}
+.work-dialog-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2, 13, 22, 0.72);
+  backdrop-filter: blur(12px);
+}
+.work-dialog {
+  position: relative;
+  width: min(560px, 92vw);
+  padding: 42px;
+  border: 1px solid rgba(225, 242, 248, 0.3);
+  color: #f4fafc;
+  background: linear-gradient(145deg, rgba(28, 61, 78, 0.96), rgba(8, 28, 41, 0.98));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.38);
+}
+.work-dialog > span {
+  font-size: 7px;
+  letter-spacing: 0.24em;
+  opacity: 0.58;
+}
+.work-dialog h2 {
+  margin: 12px 0 28px;
+  font:
+    400 clamp(30px, 5vw, 48px)/1.2 'Songti SC',
+    'SimSun',
+    serif;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.work-dialog h2.is-long-title {
+  font-size: clamp(23px, 4vw, 36px);
+  letter-spacing: 0.04em;
+}
+.work-dialog dl {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+.work-dialog dl div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  padding: 13px 16px;
+  background: rgba(8, 31, 45, 0.94);
+}
+.work-dialog dt {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  opacity: 0.56;
+}
+.work-dialog dd {
+  margin: 0;
+  font-size: 12px;
+}
+.work-dialog-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-bottom: 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  color: inherit;
+  background: transparent;
+  font: 400 11px/1.4 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.12em;
+  transition: 0.25s ease;
+}
+.work-dialog-detail-link.is-pending {
+  cursor: default;
+  opacity: 0.58;
+}
+.work-dialog-detail-link:not(:disabled):hover {
+  border-color: #fff;
+  transform: translateX(4px);
+}
+.work-dialog-detail-link i {
+  font-style: normal;
+}
+.work-dialog-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font-size: 25px;
+  font-weight: 200;
 }
 @media (max-width: 900px) {
   .timeline-nav {
@@ -290,16 +474,24 @@
   }
   .work-card {
     width: min(620px, 88vw);
-    min-height: 62vh;
   }
   .work-image img {
-    min-height: 300px;
+    min-height: 0;
+  }
+  .work-image-placeholder {
+    min-height: 0;
   }
   .work-info {
     padding: 18px 10px 10px;
   }
-  .work-info button {
-    display: none;
+  .work-info .work-detail-entry {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-self: start;
+    margin-top: 8px;
+  }
+  .work-dialog {
+    padding: 34px 24px 28px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

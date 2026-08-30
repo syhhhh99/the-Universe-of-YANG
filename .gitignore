@@ -4,7 +4,10 @@ dist
 .npm-cache
 .agents
 .codex
+.codex-spreadsheet/
 .workbuddy
+outputs/
+~$*.xlsx
 .env
 .env.*
 !.env.example

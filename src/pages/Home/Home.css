@@ -260,6 +260,12 @@
   transition: opacity 1.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @keyframes entry-photo-in {
   to {
     opacity: 1;

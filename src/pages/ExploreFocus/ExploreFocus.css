@@ -1,0 +1,512 @@
+.focus-page {
+  min-height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  background: #071522;
+}
+
+.focus-nav {
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  color: #173748;
+  background: rgba(236, 246, 248, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  animation: focus-nav-reveal 0.85s cubic-bezier(0.22, 0.72, 0.2, 1) 0.08s both;
+}
+
+.focus-brand {
+  display: grid;
+  gap: 3px;
+}
+
+.focus-brand b {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.focus-brand small,
+.focus-nav-title,
+.focus-back {
+  font-size: 7px;
+  letter-spacing: 0.18em;
+}
+
+.focus-nav-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.focus-stage {
+  position: fixed;
+  inset: 72px 0 0;
+  min-height: 688px;
+  overflow: hidden;
+}
+
+.focus-carousel,
+.focus-carousel img,
+.focus-veil,
+.focus-grid {
+  position: absolute;
+  inset: 0;
+}
+
+.focus-carousel {
+  background: #102434;
+}
+
+.focus-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 44%;
+  opacity: 0;
+  filter: saturate(0.76) contrast(0.98);
+  transform: scale(1.04);
+  transition:
+    opacity 1.3s ease,
+    transform 7.5s ease;
+}
+
+.focus-carousel img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.focus-veil {
+  background:
+    linear-gradient(90deg, rgba(3, 14, 25, 0.74), rgba(4, 18, 31, 0.1) 47%, rgba(2, 14, 26, 0.48)),
+    linear-gradient(0deg, rgba(2, 12, 22, 0.92), transparent 55%, rgba(3, 15, 26, 0.18));
+  pointer-events: none;
+}
+
+.focus-grid {
+  left: 5%;
+  right: 5%;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(90deg, transparent 49.95%, rgba(255, 255, 255, 0.07) 50%, transparent 50.05%);
+  pointer-events: none;
+}
+
+.focus-intro {
+  position: absolute;
+  z-index: 4;
+  top: 12%;
+  left: 8%;
+  width: min(36vw, 510px);
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.35);
+  animation: focus-content-reveal 1s cubic-bezier(0.22, 0.72, 0.2, 1) 0.28s both;
+}
+
+.focus-intro > span {
+  font-size: 7px;
+  letter-spacing: 0.3em;
+  opacity: 0.6;
+}
+
+.focus-intro h1 {
+  margin: 14px 0 16px;
+  font: 400 clamp(34px, 4.2vw, 67px)/1.12 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.08em;
+}
+
+.focus-intro p {
+  width: min(100%, 390px);
+  margin: 0;
+  font: 400 11px/1.8 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.09em;
+  opacity: 0.68;
+}
+
+.focus-intro p + p {
+  margin-top: 8px;
+}
+
+.focus-anniversary {
+  position: absolute;
+  z-index: 6;
+  top: 35%;
+  left: 67%;
+  display: grid;
+  justify-items: center;
+  transform: translate(-50%, -50%);
+  animation: focus-content-reveal 1.05s cubic-bezier(0.22, 0.72, 0.2, 1) 0.46s both;
+}
+
+.focus-orbit {
+  position: relative;
+  display: grid;
+  width: 246px;
+  height: 246px;
+  place-content: center;
+  justify-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 50%;
+  background: rgba(8, 25, 39, 0.18);
+  box-shadow:
+    0 0 90px rgba(10, 28, 42, 0.3),
+    inset 0 0 55px rgba(230, 246, 255, 0.07);
+  text-align: center;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(8px);
+  transition: 0.35s ease;
+}
+
+.focus-orbit:hover {
+  background: rgba(19, 48, 65, 0.36);
+  transform: scale(1.025);
+}
+
+.focus-orbit > span,
+.focus-orbit > small {
+  font-size: 7px;
+  letter-spacing: 0.25em;
+  opacity: 0.65;
+}
+
+.focus-orbit strong {
+  margin: 7px 0 2px;
+  font: 400 73px/0.95 Georgia, serif;
+}
+
+.focus-orbit p {
+  margin: 5px 0;
+  font: 400 12px/1.4 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.09em;
+}
+
+.focus-ring {
+  position: absolute;
+  inset: -17px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  animation: focus-orbit-spin 18s linear infinite;
+}
+
+.focus-ring::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 13px #fff;
+}
+
+.focus-ring-two {
+  inset: -34px;
+  border-style: dashed;
+  opacity: 0.48;
+  animation-duration: 28s;
+  animation-direction: reverse;
+}
+
+.focus-anniversary-more {
+  margin-top: 47px;
+  font: 400 10px/1.4 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.1em;
+  opacity: 0.72;
+  transition: 0.25s ease;
+}
+
+.focus-anniversary-more:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.focus-anniversary-more i {
+  margin-left: 5px;
+  font-style: normal;
+}
+
+.focus-timeline {
+  position: absolute;
+  z-index: 8;
+  right: 5%;
+  bottom: 6.5%;
+  left: 5%;
+  display: grid;
+  min-height: 144px;
+  grid-template-columns: 90px minmax(270px, 0.85fr) minmax(260px, 1.15fr) 92px;
+  align-items: center;
+  gap: 26px;
+  padding: 20px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  background: linear-gradient(110deg, rgba(226, 246, 253, 0.2), rgba(255, 255, 255, 0.055));
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(14px);
+  transition: 0.35s ease;
+  animation: focus-content-reveal 1.05s cubic-bezier(0.22, 0.72, 0.2, 1) 0.66s both;
+}
+
+.focus-timeline:hover {
+  border-color: rgba(255, 255, 255, 0.48);
+  background: linear-gradient(110deg, rgba(226, 246, 253, 0.25), rgba(255, 255, 255, 0.08));
+  transform: translateY(-5px);
+}
+
+.focus-timeline-number {
+  display: grid;
+  gap: 6px;
+  align-self: stretch;
+  align-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.focus-timeline-number span {
+  font: 400 29px/1 Georgia, serif;
+}
+
+.focus-timeline-number small,
+.focus-timeline-copy > span,
+.focus-timeline-meta span,
+.focus-track-labels {
+  font-size: 6px;
+  letter-spacing: 0.21em;
+  opacity: 0.55;
+}
+
+.focus-timeline-copy h2 {
+  margin: 5px 0 4px;
+  font: 400 26px/1.1 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.12em;
+}
+
+.focus-timeline-copy p {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  opacity: 0.62;
+}
+
+.focus-timeline-track {
+  display: grid;
+  gap: 11px;
+}
+
+.focus-track-labels,
+.focus-track-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.focus-track-line {
+  position: relative;
+  align-items: center;
+}
+
+.focus-track-line::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.8));
+}
+
+.focus-track-line i {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: #27475a;
+}
+
+.focus-track-line i:last-child {
+  background: #fff;
+  box-shadow: 0 0 12px #fff;
+}
+
+.focus-timeline-meta {
+  display: grid;
+  justify-items: end;
+}
+
+.focus-timeline-meta strong {
+  font: 400 36px/1 Georgia, serif;
+}
+
+.focus-timeline-meta > i {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  margin-top: 10px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 50%;
+  font-size: 10px;
+  font-style: normal;
+}
+
+.focus-carousel-controls {
+  position: absolute;
+  z-index: 9;
+  right: 5%;
+  bottom: 2.4%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  animation: focus-content-reveal 0.8s ease-out 0.88s both;
+}
+
+.focus-carousel-controls > span {
+  font-size: 6px;
+  letter-spacing: 0.13em;
+  opacity: 0.54;
+}
+
+.focus-carousel-controls > div {
+  display: flex;
+  gap: 4px;
+}
+
+.focus-carousel-controls button {
+  width: 18px;
+  height: 2px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.3);
+  transition: 0.25s ease;
+}
+
+.focus-carousel-controls button.is-active {
+  width: 36px;
+  background: #fff;
+}
+
+@keyframes focus-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes focus-content-reveal {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes focus-nav-reveal {
+  from {
+    opacity: 0;
+    translate: 0 -18px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .focus-stage {
+    position: absolute;
+    min-height: 820px;
+  }
+  .focus-intro {
+    top: 7%;
+    width: 43vw;
+  }
+  .focus-anniversary {
+    top: 32%;
+    left: 70%;
+  }
+  .focus-orbit {
+    width: 200px;
+    height: 200px;
+  }
+  .focus-orbit strong {
+    font-size: 58px;
+  }
+  .focus-timeline {
+    grid-template-columns: 64px 1fr 70px;
+  }
+  .focus-timeline-track {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .focus-nav {
+    padding: 0 20px;
+  }
+  .focus-nav-title {
+    display: none;
+  }
+  .focus-stage {
+    min-height: 900px;
+  }
+  .focus-intro {
+    top: 7%;
+    right: 24px;
+    left: 24px;
+    width: auto;
+    text-align: center;
+  }
+  .focus-intro h1 {
+    font-size: 34px;
+  }
+  .focus-intro p {
+    margin: auto;
+  }
+  .focus-anniversary {
+    top: 43%;
+    left: 50%;
+  }
+  .focus-timeline {
+    right: 14px;
+    bottom: 6%;
+    left: 14px;
+    min-height: 132px;
+    grid-template-columns: 48px 1fr 48px;
+    gap: 14px;
+    padding: 17px;
+  }
+  .focus-timeline-number small,
+  .focus-timeline-copy p {
+    display: none;
+  }
+  .focus-timeline-meta strong {
+    font-size: 27px;
+  }
+  .focus-carousel-controls {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .focus-carousel img,
+  .focus-nav,
+  .focus-intro,
+  .focus-anniversary,
+  .focus-orbit,
+  .focus-ring,
+  .focus-timeline,
+  .focus-anniversary-more,
+  .focus-carousel-controls {
+    animation: none;
+    transition: none;
+  }
+}

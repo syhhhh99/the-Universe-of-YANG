@@ -1,47 +1,72 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useDocumentTitle } from '@/hooks/useDocumentTitle';
+import { timelineWorks, type TimelineWork } from '@/data/timelineWorks';
+import { getImageAdjustment } from '@/data/imageAdjustments';
 import explore01 from '@/assets/images/explore-01.jpg';
 import explore02 from '@/assets/images/explore-02.jpg';
 import explore03 from '@/assets/images/explore-03.jpg';
 import explore04 from '@/assets/images/explore-04.jpg';
-import gallery01 from '@/assets/images/gallery-01.jpg';
-import gallery02 from '@/assets/images/gallery-02.jpg';
-import gallery03 from '@/assets/images/gallery-03.jpg';
-import gallery04 from '@/assets/images/gallery-04.jpg';
 import './Timeline.css';
 
-const works = [
-  { year: '2010', title: '作品名称 01', role: '角色名称 01', image: explore01 },
-  { year: '2011', title: '作品名称 02', role: '角色名称 02', image: explore02 },
-  { year: '2013', title: '作品名称 03', role: '角色名称 03', image: explore03 },
-  { year: '2015', title: '作品名称 04', role: '角色名称 04', image: explore04 },
-  { year: '2017', title: '作品名称 05', role: '角色名称 05', image: gallery01 },
-  { year: '2019', title: '作品名称 06', role: '角色名称 06', image: gallery02 },
-  { year: '2021', title: '作品名称 07', role: '角色名称 07', image: gallery03 },
-  { year: '2023', title: '作品名称 08', role: '角色名称 08', image: gallery04 },
-];
+const timelineBackgrounds = [explore01, explore02, explore03, explore04];
+const TIMELINE_IMAGE_RATIO = 1.66;
+
+function parseImagePosition(position = '50% 50%') {
+  const [x = '50%', y = '50%'] = position.split(/\s+/);
+  return { x: Number.parseFloat(x), y: Number.parseFloat(y) };
+}
+
+function getReleaseYear(work: TimelineWork) {
+  return work.releaseDate?.slice(0, 4) ?? '待定';
+}
 
 export function Timeline() {
   const { layout } = useParams();
-  const [active, setActive] = useState(0);
+  const [activeBackground, setActiveBackground] = useState(0);
+  const [imageRatios, setImageRatios] = useState<Record<string, number>>({});
   const scrollRef = useRef<HTMLDivElement>(null);
+  const wheelLockRef = useRef(false);
   useDocumentTitle('时间轴 · The Universe of Yang');
+
+  useEffect(() => {
+    const carousel = window.setInterval(
+      () => setActiveBackground((value) => (value + 1) % timelineBackgrounds.length),
+      6500,
+    );
+    return () => window.clearInterval(carousel);
+  }, []);
 
   useEffect(() => {
     const root = scrollRef.current;
     if (!root) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(Number((visible.target as HTMLElement).dataset.index));
-      },
-      { root, threshold: [0.35, 0.55, 0.75] },
-    );
-    root.querySelectorAll<HTMLElement>('.timeline-work').forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
+
+    const handleTimelineWheel = (event: WheelEvent) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+
+      event.preventDefault();
+      if (wheelLockRef.current) return;
+
+      const direction = Math.sign(event.deltaY);
+      const currentPage = Math.round(root.scrollTop / root.clientHeight);
+      const targetPage = Math.min(
+        timelineWorks.length,
+        Math.max(0, currentPage + direction),
+      );
+      if (targetPage === currentPage) return;
+
+      wheelLockRef.current = true;
+      root.scrollTo({
+        top: targetPage * root.clientHeight,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+      window.setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 620);
+    };
+
+    root.addEventListener('wheel', handleTimelineWheel, { passive: false });
+    return () => root.removeEventListener('wheel', handleTimelineWheel);
   }, []);
 
   if (layout !== 'alternate') return <Navigate to="/timeline/alternate" replace />;
@@ -58,13 +83,9 @@ export function Timeline() {
             <b>时间轴</b>
             <small>TIMELINE</small>
           </Link>
-          <Link to="/explore#footprints">
-            <b>地图足迹</b>
-            <small>FOOTPRINTS</small>
-          </Link>
-          <Link to="/explore#style">
-            <b>造型图鉴</b>
-            <small>STYLE ARCHIVE</small>
+          <Link to="/anniversaries">
+            <b>纪念日</b>
+            <small>ANNIVERSARIES</small>
           </Link>
         </nav>
         <Link to="/?version=7" className="back-home">
@@ -73,12 +94,12 @@ export function Timeline() {
       </header>
 
       <div className="timeline-backgrounds" aria-hidden="true">
-        {works.map((work, index) => (
+        {timelineBackgrounds.map((background, index) => (
           <img
-            className={index === active ? 'is-active' : ''}
-            src={work.image}
+            className={index === activeBackground ? 'is-active' : ''}
+            src={background}
             alt=""
-            key={work.year}
+            key={background}
           />
         ))}
         <div className="timeline-background-veil" />
@@ -92,34 +113,84 @@ export function Timeline() {
           <i aria-hidden="true">向下浏览</i>
         </section>
 
-        {works.map((work, index) => (
+        {timelineWorks.map((work, index) => (
           <section
             className={`timeline-work ${index % 2 ? 'is-right' : 'is-left'}`}
             data-index={index}
-            key={work.year}
+            id={work.id}
+            key={work.id}
           >
             <div className="work-year">
-              <span>{work.year}</span>
+              <span>{getReleaseYear(work)}</span>
               <small>
-                {String(index + 1).padStart(2, '0')} / {String(works.length).padStart(2, '0')}
+                {String(index + 1).padStart(2, '0')} /{' '}
+                {String(timelineWorks.length).padStart(2, '0')}
               </small>
             </div>
             <article className="work-card">
               <div className="work-image">
-                <img src={work.image} alt={`${work.title}预留图片`} />
+                {work.image ? (
+                  <img
+                    src={work.image}
+                    alt={`${work.title}剧照 1`}
+                    style={(() => {
+                      const imageRatio = imageRatios[work.id] ?? TIMELINE_IMAGE_RATIO;
+                      const fitByWidth = imageRatio <= TIMELINE_IMAGE_RATIO;
+                      const position = parseImagePosition(work.imagePosition);
+                      const baseLeft = fitByWidth
+                        ? 50
+                        : 50 + (imageRatio / TIMELINE_IMAGE_RATIO - 1) * (50 - position.x);
+                      const baseTop = fitByWidth
+                        ? 50 + (TIMELINE_IMAGE_RATIO / imageRatio - 1) * (50 - position.y)
+                        : 50;
+                      const adjustment = getImageAdjustment(
+                        work.id,
+                        0,
+                        'timeline',
+                      );
+                      return {
+                        width: fitByWidth ? '100%' : 'auto',
+                        height: fitByWidth ? 'auto' : '100%',
+                        left: `calc(${baseLeft}% + ${adjustment.offsetX}%)`,
+                        top: `calc(${baseTop}% + ${adjustment.offsetY}%)`,
+                        transform: `translate(-50%, -50%) scale(${adjustment.scale})`,
+                      };
+                    })()}
+                    onLoad={(event) => {
+                      const ratio = event.currentTarget.naturalWidth / event.currentTarget.naturalHeight;
+                      setImageRatios((current) => current[work.id] === ratio
+                        ? current
+                        : { ...current, [work.id]: ratio });
+                    }}
+                  />
+                ) : (
+                  <div
+                    className="work-image-placeholder"
+                    role="img"
+                    aria-label={`${work.title}图片待更新`}
+                  >
+                    <span>IMAGE PENDING</span>
+                    <strong>图片待更新</strong>
+                    <small>{work.id}</small>
+                  </div>
+                )}
               </div>
               <div className="work-info">
-                <span>YANG / FILMOGRAPHY</span>
-                <h2>{work.title}</h2>
-                <p>饰演角色 · {work.role}</p>
-                <button type="button">
+                <span>YANG / FILMOGRAPHY · {work.id}</span>
+                <h2 className={work.title.length > 8 ? 'is-long-title' : undefined}>{work.title}</h2>
+                <div className="work-meta">
+                  <p>{work.medium === 'film' ? '上映年份' : '播出年份'} · {getReleaseYear(work)}</p>
+                  {work.medium !== 'variety' ? <p>饰演角色 · {work.role ?? '角色待更新'}</p> : null}
+                </div>
+                <Link className="work-detail-entry" to={`/works/${work.id}`}>
                   查看作品详情 <i>↗</i>
-                </button>
+                </Link>
               </div>
             </article>
           </section>
         ))}
       </div>
+
     </div>
   );
 }

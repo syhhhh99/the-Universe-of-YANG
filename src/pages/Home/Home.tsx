@@ -15,7 +15,7 @@ export function Home() {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
-    window.setTimeout(() => navigate('/explore'), 1450);
+    window.setTimeout(() => navigate('/explore', { viewTransition: true }), 1050);
   };
 
   return (
@@ -47,7 +47,7 @@ export function Home() {
             <h1>
               the Universe of <strong>YANG</strong>
             </h1>
-            <p>杨洋在哪里我在哪里，羊毛陪你闯天涯</p>
+            <p>杨洋在哪我在哪，羊毛陪你闯天下</p>
             <button type="button" className="entry-button" onClick={enterArchive}>
               <span>点击进入</span>
               <b>ENTER THE ARCHIVE</b>
