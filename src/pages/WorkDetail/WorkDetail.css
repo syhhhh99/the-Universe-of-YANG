@@ -332,8 +332,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .work-detail-background img,
-  .work-detail-panel,
-  .work-quote-lane > div {
+  .work-detail-panel {
     animation: none;
     transition: none;
   }
