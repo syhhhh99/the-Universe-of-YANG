@@ -1,80 +1,58 @@
-.site-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 20;
-  height: var(--header-height);
-  border-bottom: 1px solid rgb(255 255 255 / 0.12);
-  background: rgb(3 10 18 / 0.72);
-  backdrop-filter: blur(18px);
+.site-shell {
+  min-height: 100vh;
 }
-.site-nav {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
-}
-.site-brand {
-  color: #ffffff;
-  font-family: var(--font-display);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  letter-spacing: 0;
-  white-space: nowrap;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-  overflow-x: auto;
-  color: rgb(255 255 255 / 0.62);
-  font-size: var(--font-size-sm);
-  scrollbar-width: none;
-}
-.nav-links::-webkit-scrollbar {
-  display: none;
-}
-.nav-link {
-  padding: var(--space-2) 0;
-  white-space: nowrap;
-  transition: color var(--transition-fast);
-}
-.nav-link:hover,
-.nav-link[aria-current='page'] {
-  color: #ffffff;
-}
+
 .site-footer {
-  border-top: 1px solid rgb(255 255 255 / 0.1);
-  padding: var(--space-8) 0;
-  background: #06101c;
-  color: rgb(255 255 255 / 0.48);
-  font-size: var(--font-size-sm);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  border-top: 1px solid rgb(218 229 234 / 0.14);
+  background: linear-gradient(90deg, rgb(4 14 23 / 0.88), rgb(7 24 35 / 0.74));
+  color: rgb(228 237 240 / 0.64);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
+
 .footer-inner {
   display: flex;
-  justify-content: space-between;
-  gap: var(--space-4);
+  min-height: 2.125rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1rem;
+  text-align: center;
+  white-space: nowrap;
 }
+
+.site-footer a {
+  transition: color 180ms ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: #ffffff;
+}
+
+.footer-link {
+  letter-spacing: 0.04em;
+}
+
 @media (max-width: 760px) {
-  .site-nav {
-    align-items: stretch;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
+  .site-footer {
+    font-size: 0.56rem;
   }
-  .site-header {
-    height: 6rem;
-  }
-  .site-brand {
-    padding-top: var(--space-2);
-  }
-  .nav-links {
-    gap: var(--space-4);
-    min-height: 2.5rem;
-  }
+
   .footer-inner {
-    flex-direction: column;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-inline: 0.75rem;
+    scrollbar-width: none;
+  }
+
+  .footer-inner::-webkit-scrollbar {
+    display: none;
   }
 }

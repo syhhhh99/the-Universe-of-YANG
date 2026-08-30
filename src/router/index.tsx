@@ -7,6 +7,7 @@ import { Anniversaries } from '@/pages/Anniversaries/Anniversaries';
 import { ExploreFocus } from '@/pages/ExploreFocus/ExploreFocus';
 import { WorkDetail } from '@/pages/WorkDetail/WorkDetail';
 import { ImagePositionEditor } from '@/pages/ImagePositionEditor/ImagePositionEditor';
+import { About } from '@/pages/About/About';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'anniversaries', element: <Anniversaries /> },
       { path: 'works/:workId', element: <WorkDetail /> },
       { path: 'image-position-editor', element: <ImagePositionEditor /> },
+      { path: 'about', element: <About /> },
       { path: '*', element: <NotFound /> },
     ],
   },
