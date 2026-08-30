@@ -113,6 +113,7 @@ export function WorkDetail() {
               style={
                 {
                   '--quote-duration': `${22 + index * 5}s`,
+                  '--quote-mobile-duration': `${16 + index * 3}s`,
                   '--quote-delay': `${index * -6}s`,
                 } as CSSProperties
               }

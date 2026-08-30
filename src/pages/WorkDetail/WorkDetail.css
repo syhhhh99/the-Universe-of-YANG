@@ -193,6 +193,10 @@
   display: flex;
   gap: 10vw;
   padding-left: 42vw;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  -webkit-animation: quoteDrift var(--quote-duration) var(--quote-delay) linear infinite;
   animation: quoteDrift var(--quote-duration) var(--quote-delay) linear infinite;
 }
 .work-quote-lane span {
@@ -241,8 +245,16 @@
   background: linear-gradient(transparent 6px, #f2f7f8 6px 8px, transparent 8px);
 }
 @keyframes quoteDrift {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 8vw)); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 8vw), 0, 0); }
+}
+@-webkit-keyframes quoteDriftMobile {
+  from { -webkit-transform: translate3d(100vw, 0, 0); }
+  to { -webkit-transform: translate3d(-100%, 0, 0); }
+}
+@keyframes quoteDriftMobile {
+  from { transform: translate3d(100vw, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
 }
 @keyframes workDetailEnter {
   from { opacity: 0; transform: translateX(20px); }
@@ -275,7 +287,18 @@
     margin-bottom: 20px;
   }
   .work-quote-lane > div {
-    padding-left: 72vw;
+    padding-left: 0;
+    gap: 14vw;
+    -webkit-animation-name: quoteDriftMobile;
+    animation-name: quoteDriftMobile;
+    -webkit-animation-duration: var(--quote-mobile-duration);
+    animation-duration: var(--quote-mobile-duration);
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
   }
   .work-detail-panel {
     top: 34vh;
