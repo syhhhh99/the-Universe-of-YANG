@@ -4,11 +4,10 @@ import './About.css';
 
 const team = [
   { role: '出品', name: '杨洋官方后援会' },
-  { role: '总策划', name: '' },
-  { role: '视觉设计', name: '' },
-  { role: '图片整理', name: '' },
-  { role: '文案策划', name: '' },
-  { role: '网站开发', name: '' },
+  { role: '总策划', name: '大毛、不闻钟' },
+  { role: '创意策划', name: '' },
+  { role: '图文整理', name: '' },
+  { role: '网站开发', name: '不闻钟' },
 ];
 
 export function About() {
@@ -76,7 +75,7 @@ export function About() {
                 {team.map((member) => (
                   <div key={member.role}>
                     <dt>{member.role}</dt>
-                    <dd>{member.name || <span aria-label="暂未填写">—</span>}</dd>
+                    <dd>{member.name || <span aria-label="暂未填写">&nbsp;</span>}</dd>
                   </div>
                 ))}
               </dl>

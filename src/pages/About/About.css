@@ -180,7 +180,11 @@
   padding: 1.2rem 1.5rem;
 }
 
-.about-team dl > div:nth-child(odd) {
+.about-team dl > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.about-team dl > div:nth-child(even) {
   border-right: 1px solid rgb(211 227 231 / 0.1);
 }
 
@@ -238,7 +242,7 @@
     grid-template-columns: 1fr;
   }
 
-  .about-team dl > div:nth-child(odd) {
+  .about-team dl > div:nth-child(even) {
     border-right: 0;
   }
 }
