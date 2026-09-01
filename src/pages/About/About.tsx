@@ -5,8 +5,8 @@ import './About.css';
 const team = [
   { role: '出品', name: '杨洋官方后援会' },
   { role: '总策划', name: '大毛、不闻钟' },
-  { role: '创意策划', name: 'Daisuuuuuuuuu、POLLY、秃头少女小菲菲、闪闪、不闻钟' },
-  { role: '图文整理', name: '小四、辽阔的草原有yyAym、小羊吹奶盖511、爱·焰99、不闻钟' },
+  { role: '创意策划', name: 'Daisuuuuuuuuu、POLLY、秃头少女小菲菲、1155665、不闻钟、雨玉' },
+  { role: '图文整理', name: '小四、好好、小羊、爱·焰99、不闻钟' },
   { role: '网站开发', name: '不闻钟' },
 ];
 
