@@ -121,6 +121,11 @@
   letter-spacing: 0.08em;
 }
 
+.focus-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
 .focus-intro p {
   width: min(100%, 390px);
   margin: 0;
@@ -507,6 +512,10 @@
     font-size: clamp(19px, 5.6vw, 24px);
     letter-spacing: 0.04em;
     white-space: nowrap;
+  }
+
+  .focus-title-line {
+    display: inline;
   }
 
   .focus-intro p {

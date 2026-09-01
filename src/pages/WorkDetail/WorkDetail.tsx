@@ -131,25 +131,6 @@ export function WorkDetail() {
         </section>
       ) : null}
 
-      {images.length > 1 ? (
-        <div className="work-detail-carousel" aria-label="剧照切换">
-          <span>
-            {String(activeImage + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-          </span>
-          <div>
-            {images.map((_, index) => (
-              <button
-                className={index === activeImage ? 'is-active' : ''}
-                type="button"
-                aria-label={`查看第 ${index + 1} 张剧照`}
-                onClick={() => setActiveImage(index)}
-                key={index}
-              />
-            ))}
-          </div>
-        </div>
-      ) : null}
-
       <main className="work-detail-panel">
         <div className="work-detail-index">
           <span>{work.id}</span>

@@ -69,7 +69,10 @@ export function ExploreFocus() {
 
         <section className="focus-intro">
           <span>THE SHAPE OF TIME · 01 / 02</span>
-          <h1>时间，以两种方式与他重逢</h1>
+          <h1>
+            <span className="focus-title-line">时间，以两种方式</span>
+            <span className="focus-title-line">与他重逢</span>
+          </h1>
           <p>一圈，将未至的日子写成期许；一线，把走过的年岁缀作星河。</p>
           <p>圆有归期，藏着未至的欢喜；线有来处，串起经年的篇章。</p>
         </section>

@@ -215,35 +215,6 @@
   color: rgba(244, 248, 248, 0.68);
   font-size: clamp(15px, 1.5vw, 24px);
 }
-.work-detail-carousel {
-  position: absolute;
-  z-index: 12;
-  bottom: 34px;
-  left: 5vw;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.work-detail-carousel > span {
-  color: rgba(240, 247, 248, 0.6);
-  font: 400 9px/1 Georgia, serif;
-  letter-spacing: 0.15em;
-}
-.work-detail-carousel > div {
-  display: flex;
-  gap: 7px;
-}
-.work-detail-carousel button {
-  width: 24px;
-  height: 2px;
-  padding: 7px 0;
-  border: 0;
-  background: linear-gradient(transparent 6px, rgba(240, 247, 248, 0.28) 6px 8px, transparent 8px);
-  cursor: pointer;
-}
-.work-detail-carousel button.is-active {
-  background: linear-gradient(transparent 6px, #f2f7f8 6px 8px, transparent 8px);
-}
 @keyframes quoteDrift {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(calc(-50% - 8vw), 0, 0); }
@@ -323,11 +294,6 @@
   }
   .work-detail-dates dd {
     font-size: 10px;
-  }
-  .work-detail-carousel {
-    top: calc(34vh - 34px);
-    bottom: auto;
-    left: 24px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

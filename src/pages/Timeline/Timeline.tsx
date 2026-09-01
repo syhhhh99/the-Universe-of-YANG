@@ -88,8 +88,8 @@ export function Timeline() {
             <small>ANNIVERSARIES</small>
           </Link>
         </nav>
-        <Link to="/?version=7" className="back-home">
-          返回首页 ↙
+        <Link to="/explore" className="back-home">
+          返回探索大厅 ↙
         </Link>
       </header>
 
